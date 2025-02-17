@@ -3,8 +3,34 @@ content-type: application/json
 
 { 
     "full_name": "john doe", 
-    "username": "johndee", 
+    "username": "johndoe", 
+    "password": "123456", 
+    "confirm_password": "123456", 
+    "gender": "male"
+}
+
+###
+
+POST http://localhost:5000/api/auth/signup HTTP/1.1
+content-type: application/json
+
+{ 
+    "full_name": "jane doe", 
+    "username": "janedoe", 
     "password": "123456", 
     "confirm_password": "123456", 
     "gender": "female"
+}
+
+###
+
+POST http://localhost:5000/api/auth/signup HTTP/1.1
+content-type: application/json
+
+{ 
+    "full_name": "jack joe", 
+    "username": "jackjoe", 
+    "password": "123456", 
+    "confirm_password": "123456", 
+    "gender": "male"
 }
