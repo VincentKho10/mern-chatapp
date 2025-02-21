@@ -2,7 +2,6 @@ POST http://localhost:5000/api/messages/send HTTP/1.1
 Content-Type: application/json
 
 {
-    "senderId": "67b2e53ccaca36ba6816f7ac",
     "message": "test ehehehe",
-    "conversationId": "67b4360ecd85b0a1064db0c8",
+    "conversationId": "67b4360ecd85b0a1064db0c8"
 }

@@ -10,6 +10,7 @@ export const login = async (req,res)=>{
         
         if(!isPassValid || !user){
             res.status(400).json({ error: "Invalid username or password" })
+            return
         }
 
         generateTokenAndSetCookie(user._id, res)
@@ -34,7 +35,6 @@ export const logout = (req,res)=>{
         console.log("Error in logout controller", error.message)
         res.status(500).json({error: "Internal server error"})
     }
-    res.send('logout user')
 }
 
 export const signup = async (req,res)=>{

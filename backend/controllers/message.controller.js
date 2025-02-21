@@ -6,7 +6,7 @@ export const sendMessage = async (req, res) => {
     const senderId = req.user._id;
     const { message, conversationId } = req.body;
 
-    const conversation = conversationModel.findById(conversationId);
+    const conversation = await conversationModel.findById(conversationId);
 
     const newMessage = new messageModel({
       senderId,
@@ -14,8 +14,10 @@ export const sendMessage = async (req, res) => {
     });
 
     await newMessage.save();
-
+    
     conversation.messages.push(newMessage._id);
+    
+    await conversation.save();
 
     res.status(201).json(newMessage);
   } catch (error) {
