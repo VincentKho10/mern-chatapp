@@ -1,11 +1,11 @@
-import React from "react";
+// import React from "react";
 import GenderCheckbox from "./GenderCheckbox";
 
 const Signup = () => {
   return (
     <div className="flex flex-col items-center justify-center mx-auto min-w-96">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-blur-lg backdrop-filter bg-opacity-0 text-left">
-        <h1 className="text-3x1 font-semibold text-gray-300 text-center">
+        <h1 className="text-3xl font-semibold text-gray-300 text-center">
           Signup
           <span className="text-blue-500">ChatApp</span>
         </h1>
