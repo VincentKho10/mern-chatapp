@@ -1,7 +1,17 @@
 // import React from "react";
+import { Link } from "react-router-dom";
 import GenderCheckbox from "./GenderCheckbox";
+import { useState } from "react";
 
 const Signup = () => {
+  const [signup, setSignup] = useState({ 
+    "full_name": "", 
+    "username": "", 
+    "password": "", 
+    "confirm_password": "", 
+    "gender": ""
+  })
+
   return (
     <div className="flex flex-col items-center justify-center mx-auto min-w-96">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-blur-lg backdrop-filter bg-opacity-0 text-left">
@@ -16,6 +26,8 @@ const Signup = () => {
               type="text"
               placeholder="John Doe"
               className="w-full input input-bordered h-10"
+              name="full_name"
+              onChange={(e)=>fieldChangeHandler(e.target)}
             />
           </div>
           <div>
@@ -24,6 +36,8 @@ const Signup = () => {
               type="text"
               placeholder="johndoe"
               className="w-full input input-bordered h-10"
+              name="username"
+              onChange={fieldChangeHandler}
             />
           </div>
           <div>
@@ -32,6 +46,8 @@ const Signup = () => {
               type="password"
               placeholder="Enter Password"
               className="w-full input input-bordered h-10"
+              name="password"
+              onChange={fieldChangeHandler}
             />
           </div>
           <div>
@@ -40,15 +56,19 @@ const Signup = () => {
               type="password"
               placeholder="Confirm Password"
               className="w-full input input-bordered h-10"
+              name="confirm_password"
+              onChange={fieldChangeHandler}
             />
           </div>
-          <GenderCheckbox />
-          <a
-            href="#"
+          <GenderCheckbox 
+              changeHandler={fieldChangeHandler}
+          />
+          <Link
+            to="/login"
             className="text-sm hover:text-blue-600 hover:underline mt-4 inline-block"
           >
             Already Have An Account?
-          </a>
+          </Link>
           <div>
             <button className="btn btn-block btn-sm border border-slate-700 text-sm mt-2">Sign Up</button>
           </div>
