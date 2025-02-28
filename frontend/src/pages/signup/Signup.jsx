@@ -12,6 +12,17 @@ const Signup = () => {
     "gender": ""
   })
 
+  const fieldChangeHandler = (e) => {
+    const target = e.target
+    let newSignup = {...signup, [target.name]:target.value}
+    setSignup(newSignup)
+  }
+
+  const signUp = (e) => {
+    e.preventDefault()
+    console.log(signup)
+  }
+
   return (
     <div className="flex flex-col items-center justify-center mx-auto min-w-96">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-blur-lg backdrop-filter bg-opacity-0 text-left">
@@ -19,7 +30,7 @@ const Signup = () => {
           Signup
           <span className="text-blue-500">ChatApp</span>
         </h1>
-        <form>
+        <form onSubmit={signUp}>
           <div>
             <label className="label p-2">Full Name</label>
             <input
@@ -27,7 +38,7 @@ const Signup = () => {
               placeholder="John Doe"
               className="w-full input input-bordered h-10"
               name="full_name"
-              onChange={(e)=>fieldChangeHandler(e.target)}
+              onChange={fieldChangeHandler}
             />
           </div>
           <div>
