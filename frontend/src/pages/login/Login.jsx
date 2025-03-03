@@ -1,8 +1,27 @@
 // import React from "react";
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
+  const [loginData, setLoginData] = useState({
+    "username": "",
+    "password": ""
+  })
+
+  const {doLogin} = useLogin(loginData)
+
+  const fieldChangeHandler = (e)=>{
+    const {name, value} = e.target
+    setLoginData({...loginData, [name]: value})
+  }
+
+  const logIn = async (e)=>{
+    e.preventDefault()
+    await doLogin(loginData)
+  }
+
   return (
     <div className="flex flex-col items-center justify-center mx-auto min-w-96">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
@@ -10,18 +29,18 @@ const Login = () => {
           Login
           <span className="text-blue-500">ChatApp</span>
         </h1>
-        <form className="text-left">
+        <form className="text-left" onSubmit={logIn}>
           <div>
             <label className="label p-2">
               <span className="text-base label-text">Username</span>
             </label>
-            <input type="text" placeholder="Enter Username" className="w-full input input-bordered h-10" />
+            <input type="text" placeholder="Enter Username" className="w-full input input-bordered h-10" name="username" onChange={fieldChangeHandler}/>
           </div>
           <div>
             <label className="label p-2">
               <span className="text-base label-text">Password</span>
             </label>
-            <input type="password" placeholder="Enter Password" className="w-full input input-bordered h-10" />
+            <input type="password" placeholder="Enter Password" className="w-full input input-bordered h-10" name="password" onChange={fieldChangeHandler}/>
           </div>
           <Link to="/signup" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">{"Don't"} have an account?</Link>
           <button className="btn btn-block btn-sm mt-2">Login</button>
