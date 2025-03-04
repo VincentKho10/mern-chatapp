@@ -39,6 +39,7 @@ export default useSignup;
 
 function inputValidationHandler(inputs) {
   const { full_name, username, password, confirm_password, gender } = inputs;
+  console.log(inputs)
   if (!full_name || !username || !password || !confirm_password || !gender) {
     toast.error("There are empty fields");
     return false;

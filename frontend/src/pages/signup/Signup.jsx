@@ -2,29 +2,29 @@
 import { Link } from "react-router-dom";
 import GenderCheckbox from "./GenderCheckbox";
 import { useState } from "react";
-import useSignup from '../../hooks/useSignup.js'
+import useSignup from "../../hooks/useSignup.js";
 
 const Signup = () => {
-  const [signup, setSignup] = useState({ 
-    "full_name": "", 
-    "username": "", 
-    "password": "", 
-    "confirm_password": "", 
-    "gender": ""
-  })
+  const [signup, setSignup] = useState({
+    full_name: "",
+    username: "",
+    password: "",
+    confirm_password: "",
+    gender: "",
+  });
 
-  const{doSignup} = useSignup(signup)
+  const { loading, doSignup } = useSignup(signup);
 
   const fieldChangeHandler = (e) => {
-    const [name, value] = e.target
-    let newSignup = {...signup, [name]:value}
-    setSignup(newSignup)
-  }
+    const { name, value } = e.target;
+    let newSignup = { ...signup, [name]: value };
+    setSignup(newSignup);
+  };
 
   const signUp = async (e) => {
-    e.preventDefault()
-    await doSignup(signup)
-  }
+    e.preventDefault();
+    await doSignup(signup);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center mx-auto min-w-96">
@@ -74,9 +74,7 @@ const Signup = () => {
               onChange={fieldChangeHandler}
             />
           </div>
-          <GenderCheckbox 
-              changeHandler={fieldChangeHandler}
-          />
+          <GenderCheckbox changeHandler={fieldChangeHandler} />
           <Link
             to="/login"
             className="text-sm hover:text-blue-600 hover:underline mt-4 inline-block"
@@ -84,7 +82,13 @@ const Signup = () => {
             Already Have An Account?
           </Link>
           <div>
-            <button className="btn btn-block btn-sm border border-slate-700 text-sm mt-2">Sign Up</button>
+            {loading ? (
+              <span className="loading loading-spinner"></span>
+            ) : (
+              <button className="btn btn-block btn-sm border border-slate-700 text-sm mt-2">
+                Sign Up
+              </button>
+            )}
           </div>
         </form>
       </div>

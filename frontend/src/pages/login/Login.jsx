@@ -6,21 +6,21 @@ import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
-    "username": "",
-    "password": ""
-  })
+    username: "",
+    password: "",
+  });
 
-  const {doLogin} = useLogin(loginData)
+  const { loading, doLogin } = useLogin(loginData);
 
-  const fieldChangeHandler = (e)=>{
-    const {name, value} = e.target
-    setLoginData({...loginData, [name]: value})
-  }
+  const fieldChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setLoginData({ ...loginData, [name]: value });
+  };
 
-  const logIn = async (e)=>{
-    e.preventDefault()
-    await doLogin(loginData)
-  }
+  const logIn = async (e) => {
+    e.preventDefault();
+    await doLogin(loginData);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center mx-auto min-w-96">
@@ -34,16 +34,37 @@ const Login = () => {
             <label className="label p-2">
               <span className="text-base label-text">Username</span>
             </label>
-            <input type="text" placeholder="Enter Username" className="w-full input input-bordered h-10" name="username" onChange={fieldChangeHandler}/>
+            <input
+              type="text"
+              placeholder="Enter Username"
+              className="w-full input input-bordered h-10"
+              name="username"
+              onChange={fieldChangeHandler}
+            />
           </div>
           <div>
             <label className="label p-2">
               <span className="text-base label-text">Password</span>
             </label>
-            <input type="password" placeholder="Enter Password" className="w-full input input-bordered h-10" name="password" onChange={fieldChangeHandler}/>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              className="w-full input input-bordered h-10"
+              name="password"
+              onChange={fieldChangeHandler}
+            />
           </div>
-          <Link to="/signup" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">{"Don't"} have an account?</Link>
-          <button className="btn btn-block btn-sm mt-2">Login</button>
+          <Link
+            to="/signup"
+            className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"
+          >
+            {"Don't"} have an account?
+          </Link>
+          {loading ? (
+            <span className="loading loading-spinner"></span>
+          ) : (
+            <button className="btn btn-block btn-sm mt-2">Login</button>
+          )}
         </form>
       </div>
     </div>
