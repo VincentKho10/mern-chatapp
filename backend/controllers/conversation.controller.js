@@ -21,12 +21,24 @@ export const initiateConversation = async (req, res) => {
       }
     }
     const newConvo = new conversationModel({
-      participants,
+      room_name:"",
+      participants
     });
+    const selpar = await newConvo.populate({path:"participants", select:"full_name"})
+    
+    let room_name = ""
+    selpar.participants.map((v, i)=>{
+      room_name+=v.full_name
+      i==participants.length-1 ? null : room_name+=", "
+    })
+    newConvo.room_name = room_name
+    console.log(newConvo)
+
     await newConvo.save();
+    
     res
       .status(200)
-      .json(await newConvo.select("-password").populate("participants"));
+      .json(newConvo);
   } catch (error) {
     console.log("Error in initiate conversation controller", error.message);
     res.status(500).json({ error: "Internal Server Error" });
@@ -46,6 +58,10 @@ export const retrieveConversation = async (req, res) => {
       },
     });
 
+    if(!conversation.participants.includes(user._id)){
+      return res.status(400).json({error: "Unauthorized - access"})
+    }
+
     if (conversation) {
       res.status(200).json({uid: user._id,conversation});
     }
@@ -58,9 +74,12 @@ export const retrieveConversation = async (req, res) => {
 export const listConversation = async (req, res)=>{
   try {
     const uid = req.user._id
-    const lsofconvo = await conversationModel.find({participants: uid}).select('_id')
+    const lsofconvo = await conversationModel.find({participants: uid})
+    // .select("participants")
+    
     res.status(200).json(lsofconvo)
   } catch (error) {
+    console.error(error.message)
     console.log("Error in list conversation controller")
   }
 }

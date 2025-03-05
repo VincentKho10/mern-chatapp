@@ -6,6 +6,6 @@ const routes = express.Router();
 
 routes.post("/initiate", protectRoute, initiateConversation);
 routes.post("/retrieve", protectRoute, retrieveConversation);
-routes.post("/list", protectRoute, listConversation);
+routes.get("/list", protectRoute, listConversation);
 
 export default routes;
