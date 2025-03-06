@@ -10,17 +10,17 @@ const useGetConversations = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      console.log("data")
       try {
         const res = await fetch("/api/conversations/list", {
           method: "GET",
         });
         const data = await res.json();
-        console.log(data)
         if (data.error) {
           throw new Error(data.error);
         }
-        setConversations(data);
+        if(data != conversations){
+          setConversations(data);
+        }
       } catch (error) {
         toast.error(error.message);
       } finally {

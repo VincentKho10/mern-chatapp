@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 // import React from 'react'
 
-// eslint-disable-next-line react/prop-types
-function Conversation({ conversation, lstIdx }) {
-  // eslint-disable-next-line react/prop-types
-  const { room_name } = conversation;
-  console.log(room_name)
+const Conversation = () => {
+  console.log("props")
+  // const { conversation, lstIdx } = props;
+  // const { room_name } = conversation;
   return (
+    <>
     <div className="flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer">
       <div className="avatar online">
         <div className="w-12 rounded-full">
@@ -14,12 +15,14 @@ function Conversation({ conversation, lstIdx }) {
       </div>
       <div className="flex flex-col flex-1">
         <div className="flex gap-3 justify-between">
-          <p className="font-bold text-gray-200">{room_name}</p>
+          {/* <p className="font-bold text-gray-200">{room_name}</p> */}
+          {/* <p className="font-bold text-gray-200">room_name</p> */}
         </div>
       </div>
 
-    {!lstIdx && <div className="divider my-0 py-0 h-1"></div>}
     </div>
+    {/* {!lstIdx&&<div className="divider my-0 py-0 h-1"></div>} */}
+    </>
   );
 }
 

@@ -5,19 +5,21 @@ import Conversation from "./Conversation";
 
 function Conversations() {
   const { loading, conversations } = useGetConversations();
+  const conversationComponents = () => {
+    return (
+      <>
+        {conversations.map(() => {
+          <Conversation />;
+        })}
+      </>
+    );
+  };
 
   return (
     <div className="pt-2 flex flex-col overflow-auto gap-2">
-      {
-      conversations.map((v,i)=>{
-        <Conversation 
-          conversation = {v}
-          lstIdx = {conversations.length - 1 == i}
-        />
-      })}
       {loading ? (
         <span className="loading loading-spinner mx-auto"></span>
-      ) : null}
+      ) : conversationComponents()}
     </div>
   );
 }
