@@ -3,16 +3,22 @@
 import { TiMessages } from "react-icons/ti";
 import MessageInput from "./MessageInput"
 import Messages from "./Messages"
+import useConversation from "../../zustand/useConversation";
+import { useEffect } from "react";
 
 function MessageContainer() {
-  const noChatSelected = true;
+  const { selectedConvo, setSelectedConvo } = useConversation();
 
+  useEffect(()=>{
+    return () => setSelectedConvo(null)
+  },[setSelectedConvo])
+  
   return (
     <div className="flex flex-col md:min-w-[450px]">
       <div className="bg-slate-500 px-4 py-2 mb-2 text-start">
-        <span className="label-text">To:</span> <span className="font-bold text-gray-900">John Doe</span>
+        <span className="label-text">To:</span> <span className="font-bold text-gray-900">{selectedConvo?selectedConvo.room_name:""}</span>
       </div>
-      {noChatSelected?(
+      {! selectedConvo?(
         <NoChatSelected />
       ):(
         <>
