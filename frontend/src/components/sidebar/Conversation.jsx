@@ -4,7 +4,7 @@
 import useConversation from "../../zustand/useConversation";
 
 const Conversation = (props) => {
-  const {selectedConvo, setSelectedConvo} = useConversation()
+  const {selectedConvo, setSelectedConvo, setMessages} = useConversation()
 
   const { conversation, lstIdx } = props;
   const { room_name, participants } = conversation;
@@ -13,12 +13,11 @@ const Conversation = (props) => {
 
   const handleSelect = ()=>{
     setSelectedConvo(conversation)
+    setMessages(conversation.messages)
     // if(isSelected){
     //   e.target.className = 
     // }
   }
-
-  console.log(participants)
 
   const moreParticipants = participants.length > 2
   const groupProfile = "https://www.ibcs.com/wp-content/uploads/2024/01/Projekt-bez-nazwy-15.png"
