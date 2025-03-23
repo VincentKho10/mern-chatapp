@@ -13,7 +13,7 @@ function Message(props) {
             </div>
         </div>
         <div className={`text-white chat-bubble bg-blue-500`}>{message.message}</div>
-        <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">{timeSent}</div>
+        <div className="text-white chat-footer opacity-50 text-xs flex gap-1 items-center">{timeSent}</div>
     </div>
   )
 }

@@ -33,7 +33,6 @@ export const initiateConversation = async (req, res) => {
       i == participants.length - 1 ? null : (room_name += ", ");
     });
     newConvo.room_name = room_name;
-    console.log(newConvo);
 
     await newConvo.save();
 

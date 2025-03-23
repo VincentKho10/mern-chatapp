@@ -49,6 +49,12 @@ export const signup = async (req,res)=>{
         if (isUserExist){
             return res.status(400).json({error: "Username already exists"})
         }
+        
+        const isFullNameExist = await User.findOne({full_name});
+
+        if (isFullNameExist){
+            return res.status(400).json({error:"Full name already existed"})
+        }
 
         const profile_pic = `https://avatar.iran.liara.run/public/${gender=="male"?"boy":"girl"}?username=${username}`
 

@@ -7,15 +7,14 @@ import Message from "./Message";
 function Messages() {
   const { messages } = useConversation();
 
-  console.log(messages)
-  const domMessages = messages.map((message) => {
+  const domMessages = messages.toReversed().map((message) => {
     return <Message key={message._id} message={message} />;
   });
 
   // useEffect(domMessages,[setMessages])
 
   return (
-    <div className="flex flex-col gap-5 overflow-auto">
+    <div className="flex flex-col-reverse flex-1 gap-5 overflow-auto">
       {domMessages}
     </div>
   );
