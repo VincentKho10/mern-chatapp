@@ -33,13 +33,12 @@ const Conversation = (props) => {
       conversation.participants.forEach((v1)=>{
         if(v==v1._id){
           res = true
+          return
         }
       })
     })
-    return res
+    return res    
   })()
-
-  console.log(isOnline)
 
   return (
     <>
