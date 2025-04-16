@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {createContext, useEffect, useState, useContext} from "react"
 import { useAuthContext } from "./AuthContext";
 import io from "socket.io-client"

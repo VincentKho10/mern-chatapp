@@ -11,11 +11,11 @@ const Conversation = (props) => {
   const { conversation, lstIdx } = props;
   const { room_name, participants } = conversation;
 
-  const isSelected = selectedConvo?._id === conversation._id;
   const { onlineUsers } = useSocketContext()
-  let isOnline = false
-
   const { authUser } = useAuthContext()
+  
+  const isSelected = selectedConvo?._id === conversation._id;
+  let isOnline = false
 
   const handleSelect = () => {
     setSelectedConvo(conversation)
@@ -24,17 +24,22 @@ const Conversation = (props) => {
 
   const moreParticipants = participants.length > 2
   const groupProfile = "https://www.ibcs.com/wp-content/uploads/2024/01/Projekt-bez-nazwy-15.png"
-  const room_name_modified = room_name.split(", ").filter((v, i, a) => v != authUser.full_name).join(", ")
+  const room_name_modified = room_name.split(", ").filter((v) => v != authUser.full_name).join(", ")
 
   isOnline = (() => {
     const ouse = onlineUsers.filter((v) => v != authUser._id)
-    ouse.map((v, i, a) => {
-      if (conversation.participants.includes(v._id)) {
-        return true
-      }
+    let res = false
+    ouse.forEach((v) => {
+      conversation.participants.forEach((v1)=>{
+        if(v==v1._id){
+          res = true
+        }
+      })
     })
-    return false
+    return res
   })()
+
+  console.log(isOnline)
 
   return (
     <>

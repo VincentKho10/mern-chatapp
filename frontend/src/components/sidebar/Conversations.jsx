@@ -8,7 +8,7 @@ function Conversations() {
 
   return (
     <div className="pt-2 flex flex-col overflow-auto gap-2">
-      {conversations.map((v, i) => <Conversation key={v._id} conversation={v} lstIdx={conversations.length-1 == i} />)}
+      {conversations.map((v, i) => <Conversation key={v._id} conversation={v} lstIdx={conversations.length-1 == i}/>)}
       {loading ? (
         <span className="loading loading-spinner mx-auto"></span>
       ) : null}
