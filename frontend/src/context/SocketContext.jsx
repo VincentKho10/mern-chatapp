@@ -10,7 +10,7 @@ export const useSocketContext = ()=>{
 }
 
 export const SocketContextProvider = ({children})=>{
-    const [socket,setSocket] = useState(null)
+    const [socket, setSocket] = useState(null)
     const [onlineUsers, setOnlineUsers] = useState([])
     const {authUser} = useAuthContext()
 
@@ -35,8 +35,7 @@ export const SocketContextProvider = ({children})=>{
                 setSocket(null)
             }
         }
-    }, [authUser])
-    
+    }, [authUser])    
 
     return <SocketContext.Provider value={{socket, onlineUsers}}>{children}</SocketContext.Provider>
 }

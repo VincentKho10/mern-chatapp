@@ -37,7 +37,7 @@ const Conversation = (props) => {
         }
       })
     })
-    return res    
+    return res
   })()
 
   return (
