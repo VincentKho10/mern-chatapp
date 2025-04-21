@@ -11,6 +11,7 @@ const Conversation = (props) => {
   const { conversation, lstIdx } = props;
   const { room_name, participants } = conversation;
 
+  
   const { onlineUsers } = useSocketContext()
   const { authUser } = useAuthContext()
   
@@ -45,7 +46,7 @@ const Conversation = (props) => {
       <div onClick={handleSelect} className={`flex gap-2 items-center max-w-64 hover:bg-sky-500 ${isSelected ? "bg-sky-500" : ""} rounded p-2 py-1 cursor-pointer`}>
         <div className={`avatar ${isOnline ? "on" : "off"}line`}>
           <div className="w-12 rounded-full">
-            <img src={moreParticipants ? groupProfile : participants[0].profile_pic} alt="user avatar" />
+            <img src={moreParticipants ? groupProfile : participants[participants[0]._id==authUser._id?1:0].profile_pic} alt="user avatar" />
           </div>
         </div>
         <div className="flex flex-col flex-1">

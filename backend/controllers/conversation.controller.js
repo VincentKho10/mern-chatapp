@@ -50,7 +50,7 @@ export const retrieveConversation = async (req, res) => {
 
     const conversation = await conversationModel
       .findOne({ _id })
-      .select("-_id")
+      .select("-_id -room_name")
       .populate({
         path: "messages",
         populate: {
@@ -64,7 +64,7 @@ export const retrieveConversation = async (req, res) => {
     }
 
     if (conversation) {
-      res.status(200).json({ uid: user._id, conversation });
+      res.status(200).json(conversation);
     }
   } catch (error) {
     console.log("Error in retrieve conversation controller", error.message);

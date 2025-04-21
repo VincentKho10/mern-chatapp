@@ -2,11 +2,11 @@
 // import React from 'react'
 import { useState } from "react";
 import useConversation from "../zustand/useConversation";
-import useGetConversations from "../hooks/useGetConversations";
 
 function useSendMessages() {
-  const [ loading, setLoading ] = useState(false);
-  const { messages, setMessages, selectedConvo } = useConversation();
+  const [loading, setLoading] = useState(false);
+  const { messages, setMessages, selectedConvo, conversations, setConversations } =
+    useConversation();
 
   const sendMessage = async (message) => {
     try {
@@ -20,8 +20,17 @@ function useSendMessages() {
         }),
       });
       const data = await res.json();
+      console.log(data.newmessage);
       if (data.error) throw new Error(data.error);
-      setMessages(messages);
+      setMessages([...messages, data.newmessage]);
+      setConversations(
+        conversations.map((v) => {
+          if (v._id == data.conversationId) {
+            v.messages.push(data.newmessage);
+          }
+          return v;
+        })
+      );
     } catch (error) {
       console.log(error.messages);
     } finally {
